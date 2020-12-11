@@ -1,7 +1,7 @@
 require('dotenv').config()
 const HDWalletProvider = require('@truffle/hdwallet-provider')
 
-const { INFURA_PROJECT_ID, PRIVATE_KEY_KOVAN } = process.env
+const { INFURA_PROJECT_ID, PRIVATE_KEY_ROPSTEN_1, PRIVATE_KEY_ROPSTEN_2 } = process.env
 
 module.exports = {
   networks: {
@@ -11,11 +11,14 @@ module.exports = {
       network_id: '*',
       skipDryRun: true,
     },
-    kovan: {
+    ropsten: {
       provider: function () {
-        return new HDWalletProvider(PRIVATE_KEY_KOVAN, 'https://kovan.infura.io/v3/' + INFURA_PROJECT_ID)
+        return new HDWalletProvider(
+          [PRIVATE_KEY_ROPSTEN_1, PRIVATE_KEY_ROPSTEN_2],
+          'https://ropsten.infura.io/v3/' + INFURA_PROJECT_ID
+        )
       },
-      network_id: '42',
+      network_id: '3',
       skipDryRun: true,
     },
   },
